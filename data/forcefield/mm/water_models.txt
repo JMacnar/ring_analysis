@@ -1,0 +1,8 @@
+# ---------- Water models ----------
+# http://www.sklogwiki.org/SklogWiki/index.php/SPC_model_of_water
+#
+# Note: epsilon_O-O is in [kj/mol]. It's converted to Kelvins by BioShell when this file is loaded
+#
+# name       rOH    aHOH      qO     qH   sO         eO    rLOL aLOL
+TIP3P     0.9572  104.52  -0.834 +0.417  3.15061 0.6364
+SPC       1.0000  109.47  -0.820 +0.410  3.16600 0.6500

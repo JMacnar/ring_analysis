@@ -1,0 +1,15 @@
+# These are weights that evaluate energy of a protein backbone; 
+# the ${INPUT_SS2} symbol will be substituted by the name of SS2 file 
+# given to a bioshell program from a command line
+
+# A13 is a term that scores planar angle based on three subsequent alpha carbons
+A13                 2.0 -  ${INPUT_SS2} 0.01
+
+# T14 is based on a dihedral angle formed by four subsequent alpha carbons
+T14                 2.0 -  ${INPUT_SS2} 0.01
+
+# Ramachandran term 
+RamachandranFF        2.0 -  0.01
+
+# The Go term (on CBeta atoms)
+ContactMapEnergy ${INPUT_REFERENCE_PDB} 10.0 -1.0 2.0 2.0 10.0 _CB_

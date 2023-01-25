@@ -1,0 +1,151 @@
+
+/* ---------- SequenceAlignmentWidget styles  ---------- */
+
+div.SequenceAlignmentWidget {
+    padding: 15px ;
+    margin-bottom: 20px;
+    background: #E3EAED;
+    text-decoration: none;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: solid 1px #ACC1CF;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
+div.SequenceAlignmentWidget:hover .SequenceAlignmentWidget-nav {
+  display : block;
+}
+
+table.seq-alignment-pir table.seq-alignment-edinburgh {
+  border: none;
+  border-collapse: collapse;
+}
+
+.SequenceAlignmentWidget pre {
+  font-size: 14px;
+}
+
+pre {font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; }
+
+td.sequence-no {
+  width: 2em;
+  padding-right: 0.5em;
+  text-align: right;
+}
+
+.seq-alignment-edinburgh td.sequence-id {
+  width: 5em;
+  padding-right: 1em;
+  text-align: right;
+}
+
+.seq-alignment-pir td { text-align: left; }
+.seq-alignment-pir td.sequence-id { padding-top: 20px; }
+
+
+div.aa-sequence {
+  display: inline-block;
+  text-align: left;
+  align: left;
+  float: left;
+}
+
+div.ss-sequence {
+  display: inline-block;
+  text-align: left;
+  align: left;
+  float: left;
+}
+
+.seq-alignment-fasta td.sequence-id {
+  text-align: left;
+  padding-top: 20px;
+}
+
+.seq-alignment-fasta td { text-align: left; }
+
+div.fasta-row {
+  display: inline-block;
+  text-align: left;
+  align: left;
+  float: left;
+}
+
+div.SequenceAlignmentWidget-header{
+  float: left;
+  display: inline-block;
+  height : 30px;
+  width: 600px;
+}
+
+div.SequenceAlignmentWidget-nav{
+  float:right;
+  height : 30px;
+  display: none;
+}
+.SequenceAlignmentWidget-nav ul {
+  text-align: left;
+  display: inline;
+  margin: 0;
+  padding: 5px 4px 7px 0;
+  list-style: none;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+.SequenceAlignmentWidget-nav ul li {
+  font: bold 12px/18px sans-serif;
+  display: inline-block;
+  margin-right: -4px;
+  position: relative;
+  padding: 5px 10px;
+  background: #fff;
+  cursor: pointer;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+}
+.SequenceAlignmentWidget-navul li:hover {
+  background: #555;
+  color: #fff;
+}
+.SequenceAlignmentWidget-nav ul li ul {
+  padding: 0;
+  position: absolute;
+  top: 28px;
+  left: 0;
+  width: 120px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transiton: opacity 0.2s;
+  -moz-transition: opacity 0.2s;
+  -ms-transition: opacity 0.2s;
+  -o-transition: opacity 0.2s;
+  -transition: opacity 0.2s;
+}
+.SequenceAlignmentWidget-nav ul li ul li { 
+  background: #555; 
+  display: block; 
+  color: #fff;
+  text-shadow: 0 -1px 0 #000;
+}
+.SequenceAlignmentWidget-nav ul li ul li:hover { background: #666; }
+.SequenceAlignmentWidget-nav ul li:hover ul {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+

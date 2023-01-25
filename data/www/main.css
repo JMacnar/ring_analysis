@@ -1,0 +1,136 @@
+
+/* ---------- reset defaults ---------- */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-spacing: 0;
+}
+/* --- End of reset-defaults */
+
+div#page {
+/*  border:1px solid purple;*/
+  width:960px;
+  margin:0 auto;
+  padding:5px;
+  text-align:left;
+  position:relative
+  font: 1em/1.625 "Palatino","Palatino Linotype","Georgia","Serif";
+  text-rendering: optimizelegibility;
+}
+
+div#header {
+/*  border:2px solid red; */
+  width:960px;
+  height:30px;
+}
+
+div#leftside {
+/*  border:2px solid green; */
+  width:50px;
+  float:left;
+  margin:10px 0 10px 5px;
+  height:500px;
+}
+
+div#content {
+/*  border:2px solid blue; */
+  text-align: center;
+  width:900px;
+  margin:10px 0 10px 75px;
+  min-height:500px;
+  _height:500px
+  font-family: Palatino,Palatino Linotype,Palatino LT STD,Book Antiqua,Georgia,serif;
+}
+
+div#rightside {
+  position:absolute;
+  top:50px;
+  right:10px;
+/*  border:2px solid green; */
+  width:50px;
+  margin:0;
+  height:500px;
+}
+
+div#footer {
+/*  border:2px solid red; */
+  width:960px;
+  height:30px;
+}
+
+h3 {
+    font-size: 25px;
+    margin-bottom: 30px;
+    color: #17394F;
+}
+
+.button-link {
+    margin: 130px 0px;
+    padding: 9px 15px;
+    background: #306888;
+    color: #C7D9E5;
+    text-decoration: none;
+    font-size: 12px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: solid 1px #19384D;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    -webkit-transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    font-family: Verdana,Geneva,sans-serif; 
+}
+.button-link:hover {
+    background: #2C5870;
+    border: solid 1px #19384D;
+    text-decoration: none;
+}
+.button-link:active {
+    -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    background: #26465B;
+    border: solid 1px #19384D;
+}

@@ -1,0 +1,46 @@
+
+
+/* ---------- Styles used only by threading 1D application ---------- */
+.button-row {
+  width: 95%;
+  margin: 50px 0px 30px 0px;  
+}
+
+table.t1d-results-table {
+  width: 95%;
+  margin: 0 auto;
+  margin-bottom: 25px;
+  font-family: Palatino,Palatino Linotype,Palatino LT STD,Book Antiqua,Georgia,serif; 
+}
+
+td.t1d-results-table { 
+    padding-top: .3em;
+    padding-bottom: .2em;
+}
+
+.t1d-results-table th{
+  padding-bottom: 35px
+  margin-bottom: 15px;
+  border-bottom:1px solid black; 
+}
+
+div.t1d-queue-table {
+  width: 95%;
+  margin: 0 auto;
+  margin-bottom: 25px;
+}
+
+div.aligned-block {
+  float:left;
+  display: inline-block;
+  height: 15px;
+  background: #306888;
+}
+
+div.not-aligned-block {
+  float:left;
+  display: inline-block;
+  height: 15px;
+  background: #E3EAED;
+}
+

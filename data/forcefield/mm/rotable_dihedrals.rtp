@@ -1,0 +1,323 @@
+[ ALA ]
+ [ rotable_dihedrals ]
+     N    CA    CB    HB1
+
+[ ARG ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    CD
+    CB    CG    CD    NE
+    CG    CD    NE    CZ
+    CD    NE    CZ    NH1
+
+[ ASN ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    OD1
+    CB    CG    ND2   HD21 ;Hydrogens at ND2
+    
+[ ASP ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    OD1
+    
+[ CYS ]
+ [ rotable_dihedrals ]
+     N    CA    CB    SG
+    CA    CB    SG    HG
+
+[ GLN ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    CD
+    CB    CG    CD    OE1
+    CG    CD    NE2   HE21
+    
+[ GLU ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    CD
+    CB    CG    CD    OE1
+        
+[ HID ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    CD2
+
+[ ILE ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG1
+    CA    CB    CG1   CD1
+    CA    CB    CG2   HG21
+    CB    CG1   CD1   HD11
+
+[ LEU ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    CD1
+    CB    CG    CD1   HD11
+    CB    CG    CD2   HD21
+
+[ LYS ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    CD
+    CB    CG    CD    CE
+    CG    CD    CE    NZ
+    CD    CE    NZ    HZ3
+    
+[ MET ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    SD
+    CB    CG    SD    CE
+    CG    SD    CE    HE1
+
+[ PHE ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    CD1
+
+[ SER ]
+ [ rotable_dihedrals ]
+     N    CA    CB    OG
+    CA    CB    OG    HG
+
+[ THR ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG2
+    CA    CB    CG2   HG21
+    CA    CB    OG1   HG1
+    
+[ TRP ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    CD1
+
+[ TYR ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    CD1
+    CE1   CZ    OH    HH
+
+[ VAL ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG1
+    CA    CB    CG1   HG11
+    CA    CB    CG2   HG21
+
+[ NALA ]
+ [ rotable_dihedrals ]
+     N    CA    CB    HB1
+
+[ NARG ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    CD
+    CB    CG    CD    NE
+    CG    CD    NE    CZ
+    CD    NE    CZ    NH1
+
+[ NASN ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    OD1
+    CB    CG    ND2   HD21 ;Hydrogens at ND2
+    
+[ NASP ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    OD1
+    
+[ NCYS ]
+ [ rotable_dihedrals ]
+     N    CA    CB    SG
+    CA    CB    SG    HG
+
+[ NGLN ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    CD
+    CB    CG    CD    OE1
+    CG    CD    NE2   HE21
+    
+[ NGLU ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    CD
+    CB    CG    CD    OE1
+        
+[ NHID ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    CD2
+
+[ NILE ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG1
+    CA    CB    CG1   CD1
+    CA    CB    CG2   HG21
+    CB    CG1   CD1   HD11
+
+[ NLEU ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    CD1
+    CB    CG    CD1   HD11
+    CB    CG    CD2   HD21
+
+[ NLYS ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    CD
+    CB    CG    CD    CE
+    CG    CD    CE    NZ
+    CD    CE    NZ    HZ3
+    
+[ NMET ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    SD
+    CB    CG    SD    CE
+    CG    SD    CE    HE1
+
+[ NPHE ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    CD1
+
+[ NSER ]
+ [ rotable_dihedrals ]
+     N    CA    CB    OG
+    CA    CB    OG    HG
+
+[ NTHR ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG2
+    CA    CB    CG2   HG21
+    CA    CB    OG1   HG1
+    
+[ NTRP ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    CD1
+
+[ NTYR ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    CD1
+    CE1   CZ    OH    HH
+
+[ NVAL ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG1
+    CA    CB    CG1   HG11
+    CA    CB    CG2   HG21
+    
+[ CALA ]
+ [ rotable_dihedrals ]
+     N    CA    CB    HB1
+
+[ CARG ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    CD
+    CB    CG    CD    NE
+    CG    CD    NE    CZ
+    CD    NE    CZ    NH1
+
+[ CASN ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    OD1
+    CB    CG    ND2   HD21 ;Hydrogens at ND2
+    
+[ CASP ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    OD1
+    
+[ CCYS ]
+ [ rotable_dihedrals ]
+     N    CA    CB    SG
+    CA    CB    SG    HG
+
+[ CGLN ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    CD
+    CB    CG    CD    OE1
+    CG    CD    NE2   HE21
+    
+[ CGLU ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    CD
+    CB    CG    CD    OE1
+        
+[ CHID ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    CD2
+
+[ CILE ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG1
+    CA    CB    CG1   CD1
+    CA    CB    CG2   HG21
+    CB    CG1   CD1   HD11
+
+[ CLEU ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    CD1
+    CB    CG    CD1   HD11
+    CB    CG    CD2   HD21
+
+[ CLYS ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    CD
+    CB    CG    CD    CE
+    CG    CD    CE    NZ
+    CD    CE    NZ    HZ3
+    
+[ CMET ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    SD
+    CB    CG    SD    CE
+    CG    SD    CE    HE1
+
+[ CPHE ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    CD1
+
+[ CSER ]
+ [ rotable_dihedrals ]
+     N    CA    CB    OG
+    CA    CB    OG    HG
+
+[ CTHR ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG2
+    CA    CB    CG2   HG21
+    CA    CB    OG1   HG1
+    
+[ CTRP ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    CD1
+
+[ CTYR ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG
+    CA    CB    CG    CD1
+    CE1   CZ    OH    HH
+
+[ CVAL ]
+ [ rotable_dihedrals ]
+     N    CA    CB    CG1
+    CA    CB    CG1   HG11
+    CA    CB    CG2   HG21 
