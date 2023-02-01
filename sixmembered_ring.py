@@ -1,12 +1,12 @@
-import math, sys, os, requests
+import sys, os, requests
 import numpy as np
-from os import path
-from pathlib import Path
 from functools import reduce
+import argparse
 import gzip
 
-sys.path.append("./bin")
-os.environ["BIOSHELL_DATA_DIR"] = './data'
+
+sys.path.append(os.path.join(os.path.dirname(__file__), 'bin'))
+os.environ["BIOSHELL_DATA_DIR"] = os.path.join(os.path.dirname(__file__), 'data')
 
 from pybioshell.core.data.io import Pdb, Cif
 from pybioshell.core.chemical import PdbMolecule
@@ -16,9 +16,9 @@ from pybioshell.core.calc.structural import SaturatedRing6Geometry
 from pybioshell.core.data.structural import Residue, Chain, Structure
 from pybioshell.core.chemical import MonomerStructure
 
+#from pybioshell.core import BioShellVersion
+#print(BioShellVersion().to_string())
 
-#from google.colab import files
-#uploaded = files.upload()
 
 def extract_ligand(pdb_file_name, ligand_name, cutoff_distance):
     #check if the file is not empty
@@ -205,9 +205,21 @@ def avg(lst):
 
 
 if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser(description='Process geometry of ligands with six-membered ring from PDB structure.')
+    parser.add_argument('pdb_model', nargs='?', default='./7ol5.pdb',
+                        help='A PDB file that contains structure with the ligand of interest')
+    parser.add_argument('ligand_id', nargs='?', default='EPE', type=str,
+                        help='The three-letter PDB code of the ligand of interest from the given PDB file')
+    parser.add_argument('-d', '--distance', nargs='?', type=int, default=5,
+                        help='Radius around a ligand used to visualize the structure of the ligand and its surroundings')
+    parser.add_argument('-o', '--out', nargs='?', type=argparse.FileType('w'),
+                        help='The three-letter PDB code of the ligand of interest from the given PDB file')
+
+    args = parser.parse_args()
     np.set_printoptions(precision=2)
-    code = 'EPE'
-    pdb_file = '7ol5.pdb'
+    code = args.ligand_id
+    pdb_file = args.pdb_model
     distance = 5
     ligand_in_file, fname = extract_ligand(pdb_file, code, distance)
     chain_name = ligand_in_file.back().chain_id
@@ -264,5 +276,9 @@ if __name__ == "__main__":
         conformation = conf_check(w1_w2)
         bonds, bonds_err, twist_angle_err, conformation = bonds_statistics(atoms, code, conformation, twist_angle,
                                                                            sigma)
-        print(fname, pdb_id, chain_name, res_id, code, conformation, g.first_wing().atom_name(),
-              g.second_wing().atom_name(), round(np.degrees(twist_angle),3), round(np.degrees(twist_angle_err),3), conformation, round(t1,2), round(t2,2), round(t3,2), round(average(bonds_err)), bf_min, bf_max, bf_avg)
+        print("pdb_id", "chain", "res_no", "ligand", "conformation", "wing_atom1", "wing_atom2",
+              "twist_angle", "twist_err", "t1", "t2", "t3", "avg_bond_err", "bf_min", "bf_max", "bf_avg")
+
+        print(pdb_id, chain_name, res_id, code, conformation, g.first_wing().atom_name(),
+              g.second_wing().atom_name(), round(np.degrees(twist_angle),3), round(np.degrees(twist_angle_err),3),
+              round(t1,2), round(t2,2), round(t3,2), round(average(bonds_err)), bf_min, bf_max, bf_avg)
