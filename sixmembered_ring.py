@@ -220,7 +220,7 @@ if __name__ == "__main__":
     np.set_printoptions(precision=2)
     code = args.ligand_id
     pdb_file = args.pdb_model
-    distance = 5
+    distance = args.distance
     ligand_in_file, fname = extract_ligand(pdb_file, code, distance)
     chain_name = ligand_in_file.back().chain_id
     res_id = ligand_in_file.id()
