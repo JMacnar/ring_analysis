@@ -1,0 +1,8 @@
+*.dSYM/
+venv/
+__pycache__/
+*.pyc
+.cproject
+.idea/
+.project
+.settings/
