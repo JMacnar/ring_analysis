@@ -279,8 +279,8 @@ if __name__ == "__main__":
         bonds, bonds_err, twist_angle_err, conformation = bonds_statistics(atoms, code, conformation, twist_angle,
                                                                            sigma)
         print("pdb_id", "chain", "res_no", "ligand", "conformation", "wing_atom1", "wing_atom2",
-              "twist_angle", "twist_err", "t1", "t2", "t3", "avg_bond_err", "bf_min", "bf_max", "bf_avg")
+              "twist_angle", "twist_err", "t1", "t2", "t3", "avg_bond_err", "bf_min", "bf_max", "bf_avg", sep=";")
 
         print(pdb_id, chain_name, res_id, code, conformation, g.first_wing().atom_name(),
               g.second_wing().atom_name(), round(np.degrees(twist_angle),3), round(np.degrees(twist_angle_err),3),
-              round(t1,2), round(t2,2), round(t3,2), round(average(bonds_err)), bf_min, bf_max, bf_avg)
+              round(t1,2), round(t2,2), round(t3,2), round(average(bonds_err)), bf_min, bf_max, bf_avg, sep=";")
