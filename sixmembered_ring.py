@@ -151,17 +151,7 @@ def bonds_statistics(number_of_atoms, ligand_name, conformation_name, angle_twis
     ligand_bonds_err = []
     ideal_bonds = ""
     twist_err = ""
-    if conformation_name == "chair":
-        ideal_bonds, twist_err = ideal_ligand_geometry(angle_twist, ligand_name, '.cif')
-    elif conformation_name == "boat":
-        ideal_bonds1, twist_err1 = ideal_ligand_geometry(angle_twist, ligand_name, 'cif')
-        ideal_bonds2, twist_err2 = ideal_ligand_geometry(angle_twist, ligand_name, '.cif')
-        if min(abs(twist_err2), abs(twist_err1)) == twist_err1:
-            ideal_bonds = ideal_bonds1
-            twist_err = twist_err1
-        else:
-            ideal_bonds = ideal_bonds2
-            twist_err = twist_err2
+    ideal_bonds, twist_err = ideal_ligand_geometry(angle_twist, ligand_name, '.cif')
     if np.degrees(abs(twist_err)) > sigma_dev:
         conformation_name = "twist_" + conformation_name
     for i in range(len(number_of_atoms)):
