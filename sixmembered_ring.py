@@ -209,9 +209,9 @@ def avg(lst):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Process geometry of ligands with six-membered ring from PDB structure.')
-    parser.add_argument('pdb_model', nargs='?', default='./7ol5.pdb',
+    parser.add_argument('pdb_model', nargs='?', default='./5njf.pdb',
                         help='A PDB file that contains structure with the ligand of interest')
-    parser.add_argument('ligand_id', nargs='?', default='EPE', type=str,
+    parser.add_argument('ligand_id', nargs='?', default='MES', type=str,
                         help='The three-letter PDB code of the ligand of interest from the given PDB file')
     parser.add_argument('-d', '--distance', nargs='?', type=int, default=5,
                         help='Radius around a ligand used to visualize the structure of the ligand and its surroundings')
@@ -230,7 +230,7 @@ if __name__ == "__main__":
     ligand_sel = SelectResidueByName(code)
     filter_ligand = SelectChainResidues(chain_sel, ligand_sel)
     mol = PdbMolecule.from_pdb(fname, filter_ligand)
-    ideal = download_ideal_cif('EPE')
+    ideal = download_ideal_cif(code)
     n_atoms = ideal.n_heavy_atoms
     sigma = 10.0  # based on https://doi.org/10.1016/j.str.2021.02.004 a 10 deg is used as deviation
     #fname = sys.argv[1]
