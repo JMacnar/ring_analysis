@@ -245,9 +245,6 @@ if __name__ == "__main__":
     mol = PdbMolecule.from_pdb(fname, filter_ligand)
     if mol.count_atoms() != n_atoms:
         print("Too few atoms in %s! Expected: %d Found: %d" % (fname, n_atoms, mol.count_atoms()), file=sys.stderr)
-        with open(missing_atoms_file, "a") as missing_file:
-            print("{:4s} {:4s} {:2s} {:3s} {:3s} {:3d} {:3d}".format(
-                fname, pdb_id, chain_name, res_id, code, n_atoms, mol.count_atoms()), file=missing_file)
         sys.exit(0)
 
     rings = find_rings(mol)
