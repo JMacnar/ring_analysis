@@ -19,6 +19,8 @@ from pybioshell.core.chemical import MonomerStructure
 #from pybioshell.core import BioShellVersion
 #print(BioShellVersion().to_string())
 
+from pybioshell.utils import LogManager
+LogManager.OFF()
 
 def extract_ligand(pdb_file_name, ligand_name, cutoff_distance):
     #check if the file is not empty
