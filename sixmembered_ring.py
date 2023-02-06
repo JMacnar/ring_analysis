@@ -23,8 +23,9 @@ try:
     from pybioshell.utils import LogManager
     LogManager.OFF()
 except ImportError:
-    print('Failed to import pybioshell.so library. When rining from Google Colab, please check if file `GIT_READY` and folder `ring_analysis` are present in your working directory (Add cell and run `!ls`).\n'
-          'In other cases check if the path to the `bin/pybioshell.so` is correct')
+    print('Failed to import pybioshell.so library. \n'
+          'When running from Google Colab, please check if file `GIT_READY` and folder `ring_analysis` are present in your working directory (Add cell and run `!ls`).\n'
+          'In other cases, check if the path to the `./bin/pybioshell.so` is correct')
     sys.exit(1)
 def extract_ligand(pdb_file_name, ligand_name, cutoff_distance):
     #check if the file is not empty
