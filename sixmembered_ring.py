@@ -205,7 +205,7 @@ def avg(lst):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Process geometry of ligands with six-membered ring from PDB structure.')
-    parser.add_argument('pdb_model', nargs='?', default='./70l5.pdb',
+    parser.add_argument('pdb_model', nargs='?', default='./1ewk.pdb',
                         help='A PDB file that contains structure with the ligand of interest')
     parser.add_argument('ligand_id', nargs='?', default='EPE', type=str,
                         help='The three-letter PDB code of the ligand of interest from the given PDB file')
