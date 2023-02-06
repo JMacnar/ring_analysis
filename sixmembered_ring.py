@@ -1,3 +1,4 @@
+import logging
 import sys, os, requests
 import numpy as np
 from functools import reduce
@@ -7,21 +8,24 @@ import gzip
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'bin'))
 os.environ["BIOSHELL_DATA_DIR"] = os.path.join(os.path.dirname(__file__), 'data')
-
-from pybioshell.core.data.io import Pdb, Cif
-from pybioshell.core.chemical import PdbMolecule
-from pybioshell.core.chemical import find_rings
-from pybioshell.core.data.structural.selectors import SelectResidueByName, ChainSelector, SelectChainResidues
-from pybioshell.core.calc.structural import SaturatedRing6Geometry
-from pybioshell.core.data.structural import Residue, Chain, Structure
-from pybioshell.core.chemical import MonomerStructure
+try:
+    from pybioshell.core.data.io import Pdb, Cif
+    from pybioshell.core.chemical import PdbMolecule
+    from pybioshell.core.chemical import find_rings
+    from pybioshell.core.data.structural.selectors import SelectResidueByName, ChainSelector, SelectChainResidues
+    from pybioshell.core.calc.structural import SaturatedRing6Geometry
+    from pybioshell.core.data.structural import Residue, Chain, Structure
+    from pybioshell.core.chemical import MonomerStructure
 
 #from pybioshell.core import BioShellVersion
 #print(BioShellVersion().to_string())
 
-from pybioshell.utils import LogManager
-LogManager.OFF()
-
+    from pybioshell.utils import LogManager
+    LogManager.OFF()
+except ImportError:
+    print('Failed to import pybioshell.so library. When rining from Google Colab, please check if file `GIT_READY` and folder `ring_analysis` are present in your working directory (Add cell and run `!ls`).\n'
+          'In other cases check if the path to the `bin/pybioshell.so` is correct')
+    sys.exit(1)
 def extract_ligand(pdb_file_name, ligand_name, cutoff_distance):
     #check if the file is not empty
     if os.stat(pdb_file_name).st_size == 0:
@@ -33,34 +37,36 @@ def extract_ligand(pdb_file_name, ligand_name, cutoff_distance):
         return
     s = Pdb(str(pdb_file_name), "is_not_hydrogen is_not_alternative", False, False).create_structure(0)
     ligands = []
-    for ic in range(s.count_chains()):
-        chain = s[ic]
-        for ir in range(chain.count_residues()):
-            if chain[ir].residue_type().code3 == ligand_name:
-                ligands.append(chain[ir])
-    for l in ligands:
-        fname = "%s-%d-%s-%s.pdb" % (l.residue_type().code3, l.id(), l.owner().id(), s.code())
-        fout = open(fname, "w")
+    fnames = []
+    for ich in range(s.count_chains()):
+        current_chain = s[ich]
+        for ires in range(current_chain.count_residues()):
+            if current_chain[ires].residue_type().code3 == ligand_name:
+                ligands.append(current_chain[ires])
+                rl= current_chain[ires]
+                fname = "%s-%d-%s-%s.pdb" % (rl.residue_type().code3, rl.id(), rl.owner().id(), s.code())
+                fnames.append(fname)
+                fout = open(fname, "w")
 
-        for ic in range(s.count_chains()):
-            chain = s[ic]
-            for ir in range(chain.count_residues()):
-                r = chain[ir]
-                if r.min_distance(l) < cutoff_distance:
-                    if r.id() == l.id():
-                        for ai in range(r.count_atoms()):
-                            fout.write(r[ai].to_pdb_line() + "\n")
-                    if r.residue_type().code3 != l.residue_type().code3:
-                        for ai in range(r.count_atoms()):
-                            fout.write(r[ai].to_pdb_line() + "\n")
+                for ic in range(s.count_chains()):
+                    chain = s[ic]
+                    for ir in range(chain.count_residues()):
+                        r = chain[ir]
+                        if r.min_distance(rl) < cutoff_distance:
+                            if r.id() == rl.id():
+                                for ai in range(r.count_atoms()):
+                                    fout.write(r[ai].to_pdb_line() + "\n")
+                            if r.residue_type().code3 != rl.residue_type().code3:
+                                for ai in range(r.count_atoms()):
+                                    fout.write(r[ai].to_pdb_line() + "\n")
 
-        #full CONNECT section from pdb file is added to the ligand's pdb - it is crucial to define rings
-        for line in open(pdb_file_name).readlines():
-            if line.startswith("CONECT"):
-                fout.write(line)
+                #full CONNECT section from pdb file is added to the ligand's pdb - it is crucial to define rings
+                for line in open(pdb_file_name).readlines():
+                    if line.startswith("CONECT"):
+                        fout.write(line)
+                fout.close()
 
-        fout.close()
-        return l, fname
+    return ligands, fnames
 
 
 def download_ideal_cif(ligand_code):
@@ -199,9 +205,9 @@ def avg(lst):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Process geometry of ligands with six-membered ring from PDB structure.')
-    parser.add_argument('pdb_model', nargs='?', default='./5njf.pdb',
+    parser.add_argument('pdb_model', nargs='?', default='./70l5.pdb',
                         help='A PDB file that contains structure with the ligand of interest')
-    parser.add_argument('ligand_id', nargs='?', default='MES', type=str,
+    parser.add_argument('ligand_id', nargs='?', default='EPE', type=str,
                         help='The three-letter PDB code of the ligand of interest from the given PDB file')
     parser.add_argument('-d', '--distance', nargs='?', type=int, default=5,
                         help='Radius around a ligand used to visualize the structure of the ligand and its surroundings')
@@ -214,60 +220,60 @@ if __name__ == "__main__":
     pdb_file = args.pdb_model
     distance = args.distance
     ligand_in_file, fname = extract_ligand(pdb_file, code, distance)
-    chain_name = ligand_in_file.back().chain_id
-    res_id = ligand_in_file.id()
-    chain_sel = ChainSelector(chain_name)
-    ligand_sel = SelectResidueByName(code)
-    filter_ligand = SelectChainResidues(chain_sel, ligand_sel)
-    mol = PdbMolecule.from_pdb(fname, filter_ligand)
-    ideal = download_ideal_cif(code)
-    n_atoms = ideal.n_heavy_atoms
-    sigma = 10.0  # based on https://doi.org/10.1016/j.str.2021.02.004 a 10 deg is used as deviation
-    #fname = sys.argv[1]
-    chain_name = fname.split("-")[2]
-    code = fname.split("-")[0]
-    res_id = fname.split("-")[1]
-    pdb_id = fname.split("-")[3][0:4]
-    #n_atoms = load_atoms_counts(PATH_TO_IDEAL_SDF + code + "_ideal.sdf")
-    chain_sel = ChainSelector(chain_name)
-    ligand_sel = SelectResidueByName(code)
-    filter_ligand = SelectChainResidues(chain_sel, ligand_sel)
-    mol = PdbMolecule.from_pdb(fname, filter_ligand)
-    if mol.count_atoms() != n_atoms:
-        print("Too few atoms in %s! Expected: %d Found: %d" % (fname, n_atoms, mol.count_atoms()), file=sys.stderr)
-        sys.exit(0)
-
-    rings = find_rings(mol)
-    if len(rings) == 0:
-        print("No rings found in", fname, file=sys.stderr)
-
-    bf_min, bf_max, bf_avg = atoms_bfactor(mol)
-
-    for ring in rings:
-        if len(ring) != 6:
-            print("Ring length differs from 6", fname, file=sys.stderr)
+    print("pdb_id", "chain", "res_no", "ligand", "conformation", "wing_atom1", "wing_atom2",
+          "twist_angle", "twist_err", "t1", "t2", "t3", "avg_bond_err", "bf_min", "bf_max", "bf_avg", sep=";")
+    for lig, filen in zip(ligand_in_file, fname):
+        chain_name = lig.back().chain_id
+        res_id = lig.id()
+        chain_sel = ChainSelector(chain_name)
+        ligand_sel = SelectResidueByName(code)
+        filter_ligand = SelectChainResidues(chain_sel, ligand_sel)
+        mol = PdbMolecule.from_pdb(filen, filter_ligand)
+        ideal = download_ideal_cif(code)
+        n_atoms = ideal.n_heavy_atoms
+        sigma = 10.0  # based on https://doi.org/10.1016/j.str.2021.02.004 a 10 deg is used as deviation
+        #fname = sys.argv[1]
+        chain_name = filen.split("-")[2]
+        code = filen.split("-")[0]
+        res_id = filen.split("-")[1]
+        pdb_id = filen.split("-")[3][0:4]
+        #n_atoms = load_atoms_counts(PATH_TO_IDEAL_SDF + code + "_ideal.sdf")
+        chain_sel = ChainSelector(chain_name)
+        ligand_sel = SelectResidueByName(code)
+        filter_ligand = SelectChainResidues(chain_sel, ligand_sel)
+        mol = PdbMolecule.from_pdb(filen, filter_ligand)
+        if mol.count_atoms() != n_atoms:
+            print("Too few atoms in %s! Expected: %d Found: %d" % (fname, n_atoms, mol.count_atoms()), file=sys.stderr)
             sys.exit(0)
-        atoms = collect_atoms(mol, ring)
 
-        points = [np.array([atoms[i].x, atoms[i].y, atoms[i].z]) for i in range(8)]
+        rings = find_rings(mol)
+        if len(rings) == 0:
+            print("No rings found in", fname, file=sys.stderr)
 
-        t1 = dihedral(np.array(points[0:4]))
-        t2 = dihedral(np.array(points[1:5]))
-        t3 = dihedral(np.array(points[2:6]))
-        points = [np.array([atoms[i].x, atoms[i].y, atoms[i].z]) for i in [1, 2, 3, 6]]
-        t4 = dihedral(np.array(points[0:4]))
-        points = [np.array([atoms[i].x, atoms[i].y, atoms[i].z]) for i in [2, 1, 0, 7]]
-        t5 = dihedral(np.array(points[0:4]))
-        g = SaturatedRing6Geometry(atoms[0], atoms[1], atoms[2], atoms[3], atoms[4], atoms[5])
+        bf_min, bf_max, bf_avg = atoms_bfactor(mol)
 
-        w1_w2 = g.first_wing_angle() * g.second_wing_angle()
-        twist_angle = g.twist_angle()
-        conformation = conf_check(w1_w2)
-        bonds, bonds_err, twist_angle_err, conformation = bonds_statistics(atoms, code, conformation, twist_angle,
-                                                                           sigma)
-        print("pdb_id", "chain", "res_no", "ligand", "conformation", "wing_atom1", "wing_atom2",
-              "twist_angle", "twist_err", "t1", "t2", "t3", "avg_bond_err", "bf_min", "bf_max", "bf_avg", sep=";")
+        for ring in rings:
+            if len(ring) != 6:
+                print("Ring length differs from 6", fname, file=sys.stderr)
+                sys.exit(0)
+            atoms = collect_atoms(mol, ring)
 
-        print(pdb_id, chain_name, res_id, code, conformation, g.first_wing().atom_name(),
-              g.second_wing().atom_name(), round(np.degrees(twist_angle),3), round(np.degrees(twist_angle_err),3),
-              round(t1,2), round(t2,2), round(t3,2), round(average(bonds_err)), bf_min, bf_max, bf_avg, sep=";")
+            points = [np.array([atoms[i].x, atoms[i].y, atoms[i].z]) for i in range(8)]
+
+            t1 = dihedral(np.array(points[0:4]))
+            t2 = dihedral(np.array(points[1:5]))
+            t3 = dihedral(np.array(points[2:6]))
+            points = [np.array([atoms[i].x, atoms[i].y, atoms[i].z]) for i in [1, 2, 3, 6]]
+            t4 = dihedral(np.array(points[0:4]))
+            points = [np.array([atoms[i].x, atoms[i].y, atoms[i].z]) for i in [2, 1, 0, 7]]
+            t5 = dihedral(np.array(points[0:4]))
+            g = SaturatedRing6Geometry(atoms[0], atoms[1], atoms[2], atoms[3], atoms[4], atoms[5])
+
+            w1_w2 = g.first_wing_angle() * g.second_wing_angle()
+            twist_angle = g.twist_angle()
+            conformation = conf_check(w1_w2)
+            bonds, bonds_err, twist_angle_err, conformation = bonds_statistics(atoms, code, conformation, twist_angle,
+                                                                               sigma)
+            print(pdb_id, chain_name, res_id, code, conformation, g.first_wing().atom_name(),
+                  g.second_wing().atom_name(), round(np.degrees(twist_angle),3), round(np.degrees(twist_angle_err),3),
+                  round(t1,2), round(t2,2), round(t3,2), round(average(bonds_err)), bf_min, bf_max, bf_avg, sep=";")
