@@ -1,6 +1,6 @@
 # Six- membered ring analysis
 
-Easy to use analysis of a six-membered aliphatic ring in ligands present in prtoein complexes provided as [Google Colab notebook](https://colab.research.google.com/github/JMacnar/ring_analysis/blob/master/sixmembered_rings.ipynb)
+Easy to use analysis of a six-membered aliphatic ring in ligands present in protein complexes provided as [Google Colab notebook](https://colab.research.google.com/github/JMacnar/ring_analysis/blob/master/sixmembered_rings.ipynb)
 For more details, read our manuscript:
 
 [Macnar, J. M., Brzezinski, D., Chruszcz, M., & Gront, D. (2022). Analysis of protein structures containing HEPES and MES molecules. Protein Science, 31(9), e4415.](https://doi.org/10.1002/pro.4415)
